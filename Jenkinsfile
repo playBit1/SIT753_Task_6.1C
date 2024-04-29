@@ -22,13 +22,13 @@ pipeline {
             }
             post{
                 success{
-                    mail to: "binulben5@gmail.com",
+                    emailext to: "binulben5@gmail.com",
                     subject: "Build Status(S) Email",
                     body: "The build was successful!"
                     attachLog: true
                 }
                 failure{
-                    mail to: "binulben5@gmail.com",
+                    emailext to: "binulben5@gmail.com",
                     subject: "Build Status(F) Email",
                     body: "The build Failed!"
                     attachLog: true
@@ -50,13 +50,13 @@ pipeline {
             }
             post{
                 success{
-                    mail to: "binulben5@gmail.com",
+                    emailext to: "binulben5@gmail.com",
                     subject: "Build Status(S) Email",
                     body: "The build was successful!"
                     attachLog: true
                 }
                 failure{
-                    mail to: "binulben5@gmail.com",
+                    emailext to: "binulben5@gmail.com",
                     subject: "Build Status(F) Email",
                     body: "The build Failed!"
                     attachLog: true
