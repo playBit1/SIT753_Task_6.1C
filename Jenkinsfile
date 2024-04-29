@@ -1,41 +1,88 @@
 pipeline {
     agent any
-    environment {
-        DIRECTORY_PATH = "C:\\Users\\Binul\\Projects\\Task5.1"
-        TESTING_ENVIRONMENT = "Performance Testing Environment"
-        PRODUCTION_ENVIRONMENT = "Binul"
-    }
     stages{
         stage("Build"){
             steps{
-                echo "fetch the source code from $DIRECTORY_PATH"
-                echo "compile the code and generate any necessary artifacts"
+                echo "Running Maven build..."
+                echo "Compiling source code..."
+                echo "Packaging application..."
+                echo "Build successful!"
+                echo "Tool Used: Maven"
             }
         }
-        stage("Test"){
+        stage("Unit and Integration Tests"){
             steps{
-                echo "unit tests"
-                echo "integration tests"
+                echo "Running unit tests with JUnit..."
+                echo "Test case 1: Sample flow... PASSED"
+                echo "Unit tests passed!"
+                echo "Running integration tests with Selenium..."
+                echo "Test case 1: Sample flow... PASSED"
+                echo "Integration tests passed!"
+                echo "Tool Used: JUnit (Unit Testing), Selenium (Integration Testing)"
+            }
+            post{
+                success{
+                    mail to: "binulben5@gmail.com",
+                    subject: "Build Status(S) Email",
+                    body: "The build was successful!"
+                    attachLog: true
+                }
+                failure{
+                    mail to: "binulben5@gmail.com",
+                    subject: "Build Status(F) Email",
+                    body: "The build Failed!"
+                    attachLog: true
+                }
             }
         }
-        stage("Code Quality Check"){
+        stage("Code Analysis"){
             steps{
-                echo "check the quality of the code"
+                echo "Analyzing code with SonarQube..."
+                echo "Code analysis complete."
+                echo "Tool Used: SonarQube"
             }
         }
-        stage("Deploy"){
+        stage("Security Scan"){
             steps{
-                echo "deploy the application to $TESTING_ENVIRONMENT"
+                echo "Scanning code for vulnerabilities with OWASP ZAP..."
+                echo "Security scan complete."
+                echo "Tool Used: OWASP ZAP"
+            }
+            post{
+                success{
+                    mail to: "binulben5@gmail.com",
+                    subject: "Build Status(S) Email",
+                    body: "The build was successful!"
+                    attachLog: true
+                }
+                failure{
+                    mail to: "binulben5@gmail.com",
+                    subject: "Build Status(F) Email",
+                    body: "The build Failed!"
+                    attachLog: true
+                }
             }
         }
-        stage("Approval"){
+        stage("Deploy to Staging"){
             steps{
-                sleep 10
+                echo "Deploying the application to a staging server"
+                echo "Tool Used: AWS CodeDeploy"
+            }
+        }
+        stage("Integration Tests on Staging"){
+            steps{
+                echo "Starting integration tests on staging environment..."
+                echo "Test case 1: Sample flow... PASSED"
+                echo "Integration tests passed!"
+                echo "Tool Used: Selenium"
             }
         }
         stage("Deploy to Production"){
             steps{
-                echo "Deploying the code to production environment: $PRODUCTION_ENVIRONMENT"
+                echo "Starting deployment to production server..."
+                echo "Deploying version of the application to production..."
+                echo "Deployment to production successful!"
+                echo "Tool Used: AWS CodeDeploy"
             }
         }
     }
