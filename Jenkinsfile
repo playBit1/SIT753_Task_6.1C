@@ -23,14 +23,14 @@ pipeline {
             post{
                 success{
                     emailext to: "binulben5@gmail.com",
-                    subject: "Build Status(S) Email",
-                    body: "The build was successful!",
+                    subject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!",
+                    body: "The build Testing stage was successful!",
                     attachLog: true
                 }
                 failure{
                     emailext to: "binulben5@gmail.com",
-                    subject: "Build Status(F) Email",
-                    body: "The build Failed!",
+                    subject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!",
+                    body: "The build Testing stage Failed!",
                     attachLog: true
                 }
             }
