@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment{
+        PROJECT_NAME = "Task 6.1 Pipeline"
+    }
     stages{
         stage("Build"){
             steps{
@@ -23,14 +26,14 @@ pipeline {
             post{
                 success{
                     emailext to: "binulben5@gmail.com",
-                    subject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!",
-                    body: "The build Testing stage was successful!",
+                    subject: "$PROJECT_NAME - Build Successful!",
+                    body: "The build was successful on the Testing stage!",
                     attachLog: true
                 }
                 failure{
                     emailext to: "binulben5@gmail.com",
-                    subject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!",
-                    body: "The build Testing stage Failed!",
+                    subject: "$PROJECT_NAME - Build Failed!",
+                    body: "The build Failed on the Testing stage!",
                     attachLog: true
                 }
             }
@@ -51,14 +54,14 @@ pipeline {
             post{
                 success{
                     emailext to: "binulben5@gmail.com",
-                    subject: "Build Status(S) Email",
-                    body: "The build was successful!",
+                    subject: "$PROJECT_NAME - Build Successful!",
+                    body: "The build was successful on the Security Scan stage!",
                     attachLog: true
                 }
                 failure{
                     emailext to: "binulben5@gmail.com",
-                    subject: "Build Status(F) Email",
-                    body: "The build Failed!",
+                    subject: "$PROJECT_NAME - Build Failed!",
+                    body: "The build Failed on the Security Scan stage!",
                     attachLog: true
                 }
             }
